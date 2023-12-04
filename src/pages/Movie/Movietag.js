@@ -47,7 +47,7 @@ const CoverImg = styled.div`
 `;
 
 const CoverImgtitle = styled.div`
-
+font-size: 20px;
 font-weight: 700;
 
 `;

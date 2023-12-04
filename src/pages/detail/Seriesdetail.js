@@ -8,9 +8,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
 
 const Container = styled.div`
-  padding: 100px 0 0;
+  padding: 100px 0 ;
   display: flex;
-  justify-content: space-between;
+  
   @media screen and (max-width: 1079px) {
     flex-direction: column;
     padding: 100px 0;
@@ -18,7 +18,7 @@ const Container = styled.div`
 `;
 
 const Backimg = styled.div`
-  width: 60%;
+  width: 600px;
   height: 800px;
   background: url(${IMG_URL}/w1280/${(props) => props.$bgUrl}) no-repeat center /
     contain;

@@ -11,9 +11,10 @@ import { Navigation } from "swiper/modules";
 register();
 
 const Layout = styled.section`
-  margin-bottom: 50px;
+  
 `;
 const Covertitle = styled.section`
+  font-size: 20px;
   margin-bottom: 50px;
   font-weight: 700;
 `;
@@ -94,12 +95,12 @@ export const Seriestag = ({ Titlename, Seriesdata }) => {
     <>
       <Layout>
         <Title>{Titlename}</Title>
-        <CustomSwiper {...params}loop={true} navigation>
+        <CustomSwiper {...params} loop={true} navigation>
           {Seriesdata.map((data) => (
             <SwiperSlide key={data.id}>
               <Link to={`/seriesdetail/${data.id}`}>
                 <CoverImg $bgUrl={data.poster_path}></CoverImg>
-                <Covertitle >{data.name}</Covertitle>
+                <Covertitle>{data.name}</Covertitle>
               </Link>
             </SwiperSlide>
           ))}

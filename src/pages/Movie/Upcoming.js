@@ -22,7 +22,6 @@ const Title = styled.section`
   }
 `;
 const CoverImg = styled.div`
-
   height: 300px;
   background: url(${IMG_URL}/w500/${(props) => props.$bgUrl}) no-repeat center;
   background-size: cover;
@@ -39,14 +38,11 @@ const CoverImg = styled.div`
     margin-bottom: 15px;
     background-size: cover;
   }
-
-  
 `;
 
 const CoverImgtitle = styled.div`
+  font-size: 20px;
 
-  font-size: 25px;
-  
   font-weight: 900;
 `;
 
@@ -99,7 +95,7 @@ export const Upcoming = ({ TitleName, Moviedata }) => {
     <>
       <Layout>
         <Title>{TitleName}</Title>
-        <CustomSwiper {...params}loop={true} navigation>
+        <CustomSwiper {...params} loop={true} navigation>
           {Moviedata.map((data) => (
             <SwiperSlide key={data.id}>
               <Link to={`/detail/${data.id}`}>
