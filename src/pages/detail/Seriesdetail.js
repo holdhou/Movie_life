@@ -195,6 +195,7 @@ export const Seriesdetail = () => {
         console.log("error" + error);
       }
     })();
+    window.scrollTo(0, 0);
   }, []);
 
   console.log(aggregateData);
@@ -231,7 +232,6 @@ export const Seriesdetail = () => {
           {seriesdetailData.seasons.map((seasons) => (
             <SwiperSlide key={seasons.id}>
               <Season>
-                
                 <Seasonimg $bgUrl={seasons.poster_path}></Seasonimg>
                 <Div>
                   <Seasonname>{seasons.name}</Seasonname>
@@ -251,10 +251,9 @@ export const Seriesdetail = () => {
         >
           {aggregateData.cast.map((cast) => (
             <SwiperSlide key={cast.id}>
-               <Link to={`/people/${cast.id}`}>
-
-              <Castimg $bgUrl={cast.profile_path}></Castimg>
-               </Link>
+              <Link to={`/people/${cast.id}`}>
+                <Castimg $bgUrl={cast.profile_path}></Castimg>
+              </Link>
               <Cast>
                 <Castname>{cast.name}</Castname>
                 <Ch>{cast.character}</Ch>

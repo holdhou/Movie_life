@@ -23,9 +23,9 @@ const Title = styled.section`
 `;
 const CoverImg = styled.div`
 
-  height: 285px;
+  height: 300px;
   background: url(${IMG_URL}/w500/${(props) => props.$bgUrl}) no-repeat center;
-  background-size: contain;
+  background-size: cover;
   border-radius: 15px;
   margin-bottom: 20px;
   transition: transform 0.5s;

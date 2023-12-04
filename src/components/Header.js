@@ -72,7 +72,7 @@ export const Header = () => {
         </li>
         <SearchIconContainer>
           <Link to={"/search"}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <FontAwesomeIcon icon={faMagnifyingGlass} />검색
           </Link>
         </SearchIconContainer>
       </Menu>

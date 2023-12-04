@@ -7,5 +7,5 @@ const Container = styled.footer`
   border-top: 1px solid rgba(255, 255, 255, 0.6);
 `;
 export const Footer = () => {
-  return <Container>&copy 2023 Movie Life</Container>;
+  return <Container>&copy; 2023 Movie Life</Container>;
 };

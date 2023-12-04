@@ -73,6 +73,7 @@ export const People = () => {
         console.log("에러" + error);
       }
     })();
+    window.scrollTo(0, 0);
   }, []);
   console.log(peoplescreditsData);
   return (

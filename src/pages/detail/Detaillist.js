@@ -166,6 +166,7 @@ export const Detaillist = () => {
         console.log("error" + error);
       }
     })();
+    window.scrollTo(0, 0);
   }, []);
   console.log(moviecreditsData);
 
