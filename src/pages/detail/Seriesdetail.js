@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { moviecredits, moviedetail } from "../../api";
 import { IMG_URL } from "../../constants";
+import { aggregate_credits, seriesdetail } from "../../api";
 import { Loading } from "../../components/Loading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
+
 const Container = styled.div`
   padding: 100px 0 0;
   display: flex;
@@ -81,7 +82,6 @@ const CharacterSwiper = styled(Swiper)`
 
   .swiper-scrollbar {
     height: 10px;
-    margin-top: 10px;
   }
   .swiper-scrollbar-drag {
     border-radius: 4px;
@@ -98,6 +98,13 @@ const Castlist = styled.div`
   font-size: 1.4em;
   border-top: 4px solid gray;
 `;
+const Seasonlist = styled.div`
+  height: 100%;
+  margin-top: 15px;
+  font-size: 1.4em;
+  border-top: 4px solid gray;
+  margin-bottom: 20px;
+`;
 const Castimg = styled.div`
   width: 150px;
   height: 200px;
@@ -106,21 +113,43 @@ const Castimg = styled.div`
   background: url(${IMG_URL}/original/${(props) => props.$bgUrl}) no-repeat
     center / cover;
 `;
-const Cast = styled.div`
+const Castname = styled.div`
+  width: 150px;
+  font-weight: 900;
+  word-wrap: break-word;
+`;
+const Ch = styled.div`
   width: 150px;
   margin-bottom: 20px;
+
+  word-wrap: break-word;
+`;
+const Cast = styled.div`
+  padding: 5px 5px 0 5px;
+`;
+const Div = styled.div`
   padding: 5px 5px 0 5px;
 `;
 
-const Runtime = styled.div``;
-const Castname = styled.div`
-  font-size: 20px;
-  font-weight: 900;
-`;
-const Ch = styled.div``;
-const Crewname = styled.div`
-  padding: 5px 5px 0 5px;
+const Seasonimg = styled.div`
+  background: url(${IMG_URL}/original/${(props) => props.$bgUrl}) no-repeat
+    center / cover;
+  display: flex;
+  flex-direction: column;
   width: 150px;
+  height: 200px;
+  border: 1px solid black;
+`;
+const Seasonname = styled.h3`
+  font-size: 20px;
+  font-weight: 800;
+`;
+const Seasonopenday = styled.h3`
+  font-size: 20px;
+`;
+
+const Season = styled.div`
+  margin-bottom: 20px;
 `;
 const params = {
   modules: [Scrollbar],
@@ -133,7 +162,7 @@ const params = {
     },
     1080: {
       spaceBetween: 15,
-      slidesPerView: 7.2,
+      slidesPerView: 6,
     },
     640: {
       spaceBetween: 10,
@@ -145,21 +174,21 @@ const params = {
     },
   },
 };
-export const Detaillist = () => {
-  const { id } = useParams();
-  const [moviedetailData, setmovieDetailData] = useState();
-  const [moviecreditsData, setmoviecreditsData] = useState();
 
+export const Seriesdetail = () => {
+  const { id } = useParams();
+  const [seriesdetailData, setseriesDetailData] = useState();
+  const [aggregateData, setaggregateData] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
-        const detailData = await moviedetail(id);
-        setmovieDetailData(detailData);
+        const detailData = await seriesdetail(id);
+        setseriesDetailData(detailData);
 
-        const creditsData = await moviecredits(id);
-        setmoviecreditsData(creditsData);
+        const aggregateData = await aggregate_credits(id);
+        setaggregateData(aggregateData);
 
         setLoading(false);
       } catch (error) {
@@ -167,7 +196,9 @@ export const Detaillist = () => {
       }
     })();
   }, []);
-  console.log(moviecreditsData);
+
+  console.log(aggregateData);
+  console.log(seriesdetailData);
 
   return (
     <div>
@@ -175,59 +206,55 @@ export const Detaillist = () => {
         <Loading />
       ) : (
         <Container>
-          <Backimg $bgUrl={moviedetailData.poster_path} />
+          <Backimg $bgUrl={seriesdetailData.poster_path} />
           <Con>
-            <Title>{moviedetailData.title}</Title>
-            <Rated>평점{moviedetailData.vote_average.toFixed(1)}</Rated>
+            <Title>{seriesdetailData.name}</Title>
+
+            <Rated>평점{seriesdetailData.vote_average.toFixed(1)}</Rated>
             <Genres>
-              {moviedetailData.genres.map((genres) => (
-                <li>{genres.name}</li>
+              {seriesdetailData.genres.map((genres) => (
+                <li key={genres.id}>{genres.name}</li>
               ))}
             </Genres>
-            <Release>{moviedetailData.release_date}</Release>
-            <Runtime>상영시간{moviedetailData.runtime}분</Runtime>
-            <Overview>{moviedetailData.overview}</Overview>
+            <Release>{seriesdetailData.release_date}</Release>
+            <Overview>{seriesdetailData.overview}</Overview>
           </Con>
         </Container>
       )}
 
-      <Castlist>감독</Castlist>
-      {moviecreditsData && (
+      <Seasonlist>시리즈 시즌</Seasonlist>
+      {seriesdetailData && (
         <CharacterSwiper
           {...params}
           scrollbar={{ draggable: true, dragSize: 30 }}
         >
-          {Array.from(
-            new Map(
-              moviecreditsData.crew
-                .filter((crew) => crew.known_for_department === "Directing")
-                .map((crew) => [crew.name, crew])
-            ).values()
-          ).map((crew) => (
-            <SwiperSlide key={crew.id}>
-              <Link to={`/people/${crew.id}`}>
-                <Castimg $bgUrl={crew.profile_path}></Castimg>
-              </Link>
-              <Cast>
-                <Castname>{crew.name}</Castname>
-                <Ch>직책: {crew.known_for_department}</Ch>
-              </Cast>
+          {seriesdetailData.seasons.map((seasons) => (
+            <SwiperSlide key={seasons.id}>
+              <Season>
+                
+                <Seasonimg $bgUrl={seasons.poster_path}></Seasonimg>
+                <Div>
+                  <Seasonname>{seasons.name}</Seasonname>
+                  <Seasonopenday>방영일:{seasons.air_date}</Seasonopenday>
+                </Div>
+              </Season>
             </SwiperSlide>
           ))}
         </CharacterSwiper>
       )}
 
       <Castlist>출연진</Castlist>
-      {moviecreditsData && (
+      {aggregateData && (
         <CharacterSwiper
           {...params}
           scrollbar={{ draggable: true, dragSize: 30 }}
         >
-          {moviecreditsData.cast.map((cast) => (
+          {aggregateData.cast.map((cast) => (
             <SwiperSlide key={cast.id}>
-              <Link to={`/people/${cast.id}`}>
-                <Castimg $bgUrl={cast.profile_path}></Castimg>
-              </Link>
+               <Link to={`/people/${cast.id}`}>
+
+              <Castimg $bgUrl={cast.profile_path}></Castimg>
+               </Link>
               <Cast>
                 <Castname>{cast.name}</Castname>
                 <Ch>{cast.character}</Ch>

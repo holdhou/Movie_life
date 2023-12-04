@@ -11,25 +11,27 @@ import { Navigation } from "swiper/modules";
 register();
 
 const Layout = styled.section`
-  margin-bottom: 50px;
+  margin: 0 0 10px 0;
 `;
 
 const Title = styled.section`
   font-size: 50px;
   font-weight: 600;
   margin-bottom: 10px;
-  padding-left: 5%;
+  
 
   @media screen and (max-width: 450px) {
     font-size: 30px;
   }
 `;
 const CoverImg = styled.div`
-  height: 300px;
+
+  height: 285px;
   background: url(${IMG_URL}/w500/${(props) => props.$bgUrl}) no-repeat center;
-  background-size: cover;
+  background-size: contain;
   border-radius: 15px;
   margin-bottom: 20px;
+  border: 3px solid black;
   transition: transform 0.5s;
   &:hover {
     transform: scale(1.1);
@@ -38,11 +40,16 @@ const CoverImg = styled.div`
   @media screen and (max-width: 450px) {
     height: 150px;
     margin-bottom: 15px;
+    background-size: cover;
   }
 
-  @media screen and (max-width: 450px) {
-    height: 150px;
-  }
+  
+`;
+
+const CoverImgtitle = styled.div`
+
+font-weight: 700;
+
 `;
 
 const CustomSwiper = styled(Swiper)`
@@ -63,7 +70,7 @@ const CustomSwiper = styled(Swiper)`
 const params = {
   modules: [Navigation],
   spaceBetween: 20,
-  slidesPerView: 5.5,
+  slidesPerView: 10,
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
@@ -71,9 +78,13 @@ const params = {
   },
 
   breakpoints: {
+    1920: {
+      spaceBetween: 20,
+      slidesPerView: 8.3,
+    },
     1024: {
       spaceBetween: 20,
-      slidesPerView: 5.5,
+      slidesPerView: 6.3,
     },
     640: {
       spaceBetween: 15,
@@ -81,7 +92,7 @@ const params = {
     },
     320: {
       spaceBetween: 10,
-      slidesPerView: 3.2,
+      slidesPerView: 2.2,
     },
   },
 };
@@ -91,11 +102,12 @@ export const Movietag = ({ TitleName, Moviedata }) => {
     <>
       <Layout>
         <Title>{TitleName}</Title>
-        <CustomSwiper {...params} navigation>
+        <CustomSwiper {...params}loop={true} navigation>
           {Moviedata.map((data) => (
             <SwiperSlide key={data.id}>
               <Link to={`/detail/${data.id}`}>
                 <CoverImg $bgUrl={data.poster_path}></CoverImg>
+                <CoverImgtitle>{data.title}</CoverImgtitle>
               </Link>
             </SwiperSlide>
           ))}

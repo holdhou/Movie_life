@@ -22,3 +22,5 @@ export const Popular = () =>
   fetch(Popularurl, options).then((res) => res.json());
 export const TopRated = () =>
   fetch(TopRatedurl, options).then((res) => res.json());
+
+  

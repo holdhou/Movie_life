@@ -29,13 +29,49 @@ export const top_rated = () =>
 export const upcoming = () =>
   fetch(url("movie/upcoming"), options).then((res) => res.json());
 
-export const search = () =>
-  fetch(url("search/multi"), options).then((res) => res.json());
+export const moviedetail = (movieid) => {
+  const moviedetailUrl = baseurl + `movie/${movieid}` + "?language=ko-kr";
+  return fetch(moviedetailUrl, options).then((res) => res.json());
+};
 
-/*   export const detaillist = () =>
-  fetch(url(`movie/`), options).then((res) => res.json());  */
+export const moviecredits = (moviecredits) => {
+  const moviecreditsUrl =
+    baseurl + `movie/${moviecredits}/credits` + "?language=ko-kr";
+  return fetch(moviecreditsUrl, options).then((res) => res.json());
+};
 
-export const detaillist = (movie_id) => {
-  const detailUrl = baseurl + `movie/${movie_id}` + "?language=ko-kr";
-  return fetch(detailUrl, options).then((res) => res.json());
+/*V tv시리즈 api V*/
+export const seriesdetail = (seriesid) => {
+  const seriesdetailUrl = baseurl + `tv/${seriesid}` + "?language=ko-kr";
+  return fetch(seriesdetailUrl, options).then((res) => res.json());
+};
+
+export const aggregate_credits = (aggregateid) => {
+  const aggregateUrl =
+    baseurl + `tv/${aggregateid}/credits` + "?language=ko-kr";
+  return fetch(aggregateUrl, options).then((res) => res.json());
+};
+
+/* 검색api */
+export const searchapi = (searchid) => {
+  const searchUrl = baseurl + `search/multi?query=${searchid}&language=ko-kr`;
+  return fetch(searchUrl, options).then((res) => res.json());
+};
+
+/* 배우및감독 api */
+export const peopleapi = (peopleid) => {
+  const peopleUrl =
+    baseurl + `person/${peopleid}` + "?language=ko-kr";
+  return fetch(peopleUrl, options).then((res) => res.json());
+};
+export const peoplecreaditapi = (peopleid) => {
+  const peopleUrl =
+    baseurl + `person/${peopleid}/combined_credits` + "?language=ko-kr";
+  return fetch(peopleUrl, options).then((res) => res.json());
+};
+
+export const peopletranslationsapi = (peopleid) => {
+  const peopleUrl =
+    baseurl + `person/${peopleid}/translations` + "?language=ko-kr";
+  return fetch(peopleUrl, options).then((res) => res.json());
 };

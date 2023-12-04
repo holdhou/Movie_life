@@ -8,15 +8,15 @@ ${reset}
     
 }
 body{
-    color: white;
+    
     letter-spacing:  -1px;
     word-break: break-all;
-    background-color: gray;
-    
+      font-family: "Noto+Sans+KR",sans-serif;
+      margin: 0 5% 0 5%;
 }
 a{
     text-decoration: none;
-    color: white;
+    color: black;
 }
 ul{
     list-style: none;

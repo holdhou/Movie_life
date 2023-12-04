@@ -9,7 +9,7 @@ const Mainbanner = styled.section`
     center;
   background-size: cover;
 
-  padding: 25% 5%;
+  padding: 25% 0;
   h3 {
     max-width: 600px;
     width: 100%;
@@ -24,7 +24,6 @@ const Mainbanner = styled.section`
     line-height: 25px;
     max-width: 600px;
     width: 100%;
-    
   }
 `;
 
@@ -40,7 +39,7 @@ const Playbutton = styled.ul`
   justify-content: space-between;
   float: left;
   font-size: 30px;
-  
+
   font-weight: 900;
 
   text-align: center;
@@ -53,16 +52,16 @@ const Playbutton = styled.ul`
     margin-left: 5%;
     border-radius: 50%;
 
-    background-color: #868f94;
+    background-color: #0390d2;
   }
 `;
 
 const More_information = styled.div`
   padding: 3%5%;
   border-radius: 15px;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.41);
   a {
-    color: black;
+    color: white;
   }
 `;
 
@@ -75,7 +74,7 @@ export const Mainseries = ({ seriesdata }) => {
       <p>{seriesdata.overview.slice(0, 100) + "..."}</p>
       <Playbutton>
         <More_information>
-          <Link to={routes.detail}>상세정보</Link>
+          <Link to={`/seriesdetail/${seriesdata.id}`}>상세정보</Link>
         </More_information>
         <li>{VoteAverage}</li>
       </Playbutton>

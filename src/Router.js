@@ -7,6 +7,9 @@ import { routes } from "./routes";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Detaillist } from "./pages/detail/Detaillist";
+import { Seriesdetail } from "./pages/detail/Seriesdetail";
+import { Search } from "./pages/Search/Search";
+import { People } from "./pages/people/People";
 
 const Router = () => {
   return (
@@ -16,6 +19,9 @@ const Router = () => {
         <Route path={routes.Movie} element={<Movie />} />
         <Route path={routes.Series} element={<Series />} />
         <Route path={routes.detail} element={<Detaillist />} />
+        <Route path={routes.seriesdetail} element={<Seriesdetail />} />
+        <Route path={routes.search} element={<Search />} />
+        <Route path={routes.people} element={<People />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />

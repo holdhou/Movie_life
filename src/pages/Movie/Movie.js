@@ -8,6 +8,8 @@ import { Topmovie } from "./Topmovie";
 import { Movietag } from "./Movietag";
 import { Upcoming } from "./Upcoming";
 import { PageTitle } from "../../components/PageTitle";
+import { Loading } from "../../components/Loading";
+
 export const Movie = () => {
   const [nowplayData, setnowplayData] = useState();
   const [popularData, setpopularData] = useState();
@@ -40,13 +42,13 @@ export const Movie = () => {
 
   return (
     <>
-      <PageTitle titleName="Movie" />
       {loading ? (
-        "loading..."
+        <Loading />
       ) : (
         <>
           {nowplayData && (
             <>
+              <PageTitle titleName="Movie" />
               <Mainmovie data={nowplayData[0]} />
               <Topmovie TitleName={"인기영화TOP10"} Moviedata={popularData} />
               <Movietag TitleName={"추천Movie"} Moviedata={topratedData} />

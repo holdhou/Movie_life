@@ -3,28 +3,44 @@ import { Link } from "react-router-dom";
 import { routes } from "../routes";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faTicket } from "@fortawesome/free-solid-svg-icons";
 
 const SHeader = styled.header`
   width: 100%;
   display: flex;
-  position: relative;
-  align-items: center;
-  background-color: #333333;
-  padding: 1% 5%;
   position: fixed;
+  align-items: center;
+  background-color: #0390d2;
+  padding: 1% 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 5;
+  font-weight: 900;
+`;
+
+const Img = styled.div`
+  display: none;
+  color: white;
+  @media screen and (max-width: 500px) {
+    display: block;
+  }
+`;
+const Logonone = styled.div`
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 const SearchIconContainer = styled.div`
   position: absolute;
-  right: 10%;
+  right: 10vw;
 `;
 
 const Logo = styled.div`
   font-size: 30px;
   margin-right: 20px;
   font-weight: 400;
-  border: 1px solid white;
+  margin-left: 5%;
 `;
 const Menu = styled.ul`
   display: flex;
@@ -39,7 +55,12 @@ export const Header = () => {
   return (
     <SHeader>
       <Logo>
-        <Link to={routes.Movie}>Movie LIFE</Link>
+        <Img>
+          <FontAwesomeIcon icon={faTicket} />
+        </Img>
+        <Logonone>
+          <Link to={routes.Movie}>Movie LIFE</Link>
+        </Logonone>
       </Logo>
 
       <Menu>
@@ -50,7 +71,9 @@ export const Header = () => {
           <Link to={routes.Series}>Series</Link>
         </li>
         <SearchIconContainer>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <Link to={"/search"}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </Link>
         </SearchIconContainer>
       </Menu>
     </SHeader>

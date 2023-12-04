@@ -10,13 +10,19 @@ import { Navigation } from "swiper/modules";
 register();
 
 const Layout = styled.section`
-  margin-bottom: 50px;
+  margin: 0 0 20px 0;
 `;
 const Imgnumber = styled.h4`
   font-size: 40px;
   margin: 0 auto;
   background-color: rgba(0, 0, 0, 0.8);
   text-align: center;
+  color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const CoverImg = styled.div`
@@ -24,7 +30,7 @@ const CoverImg = styled.div`
   background: url(${IMG_URL}/w500/${(props) => props.$bgUrl}) no-repeat center;
   background-size: cover;
   margin-bottom: 20px;
-
+  border-radius: 15px;
   transition: transform 0.5s;
   &:hover {
     transform: scale(1.1);
@@ -40,12 +46,18 @@ const CoverImg = styled.div`
   }
 `;
 
+const CoverImgtitle = styled.div`
+  font-size: 25px;
+  text-align: left;
+  font-weight: 900;
+`;
+
 const CustomSwiper = styled(Swiper)`
 
   .swiper-button-next,
   .swiper-button-prev {
     height: 100px;
-    color: #ffffff;
+    color: white;
     top: 40%;
     background-color: rgba(0,0,0,0.5);
     
@@ -58,7 +70,6 @@ const Title = styled.section`
   font-size: 50px;
   font-weight: 600;
   margin-bottom: 10px;
-  padding-left: 5%;
 
   @media screen and (max-width: 450px) {
     font-size: 30px;
@@ -68,6 +79,7 @@ const params = {
   modules: [Navigation],
   spaceBetween: 20,
   slidesPerView: 5.5,
+
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
@@ -98,14 +110,14 @@ export const Topmovie = ({ TitleName, Moviedata }) => {
     <>
       <Title>{TitleName}</Title>
       <Layout>
-        <CustomSwiper {...params} navigation>
+        <CustomSwiper {...params} loop={true} navigation>
           {Moviedata.slice(0, 10).map((data, index) => (
             <SwiperSlide key={data.id}>
               <Link to={`/detail/${data.id}`}>
                 <CoverImg $bgUrl={data.poster_path}>
                   <Imgnumber>TOP {index + 1}</Imgnumber>
                 </CoverImg>
-                
+                <CoverImgtitle>{data.title}</CoverImgtitle>
               </Link>
             </SwiperSlide>
           ))}

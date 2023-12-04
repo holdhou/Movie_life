@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IMG_URL } from "../../constants";
-import { routes } from "../../routes";
+
 
 const Mainvideo = styled.section`
   width: 100%;
@@ -10,7 +10,7 @@ const Mainvideo = styled.section`
     center;
   background-size: cover;
 
-  padding: 25% 5%;
+  padding: 40vh 0;
   h3 {
     max-width: 600px;
     width: 100%;
@@ -26,6 +26,11 @@ const Mainvideo = styled.section`
     max-width: 600px;
     width: 100%;
   }
+
+  @media screen and (max-width: 400px) {
+      padding: 20vh 0;
+      
+    }
 `;
 const Title = styled.div`
   font-size: 38px;
@@ -52,15 +57,15 @@ const Playbutton = styled.ul`
     margin-left: 5%;
     border-radius: 50%;
 
-    background-color: #868f94;
+    background-color: #0390d2;
   }
 `;
 const More_information = styled.div`
   padding: 3%5%;
   border-radius: 15px;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.41);
   a {
-    color: black;
+    color: white;
   }
 `;
 
@@ -74,7 +79,7 @@ export const Mainmovie = ({ data }) => {
       <p>{data.overview.slice(0, 100) + "..."}</p>
       <Playbutton>
         <More_information>
-          <Link to={routes.detail}>상세정보</Link>
+          <Link to={`/detail/${data.id}`}>상세정보</Link>
         </More_information>
         <li>{VoteAverage}</li>
       </Playbutton>

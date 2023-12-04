@@ -13,12 +13,15 @@ register();
 const Layout = styled.section`
   margin-bottom: 50px;
 `;
+const Covertitle = styled.section`
+  margin-bottom: 50px;
+  font-weight: 700;
+`;
 
 const Title = styled.section`
   font-size: 50px;
   font-weight: 600;
   margin-bottom: 10px;
-  padding-left: 5%;
 
   @media screen and (max-width: 450px) {
     font-size: 30px;
@@ -91,11 +94,12 @@ export const Seriestag = ({ Titlename, Seriesdata }) => {
     <>
       <Layout>
         <Title>{Titlename}</Title>
-        <CustomSwiper {...params} navigation>
+        <CustomSwiper {...params}loop={true} navigation>
           {Seriesdata.map((data) => (
             <SwiperSlide key={data.id}>
-              <Link to={`/datail/${data.id}`}>
+              <Link to={`/seriesdetail/${data.id}`}>
                 <CoverImg $bgUrl={data.poster_path}></CoverImg>
+                <Covertitle >{data.name}</Covertitle>
               </Link>
             </SwiperSlide>
           ))}
@@ -104,4 +108,3 @@ export const Seriestag = ({ Titlename, Seriesdata }) => {
     </>
   );
 };
-

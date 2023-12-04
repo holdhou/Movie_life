@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Mainseries } from "./Mainseries";
 import { Airing_Today, Popular, on_the_air } from "../../seriesapi";
 import { Seriestag } from "./Seriestag";
+import { Loading } from "../../components/Loading";
 
 export const Series = () => {
   const [AiringTodayData, setAiringTodayData] = useState();
@@ -36,7 +37,7 @@ export const Series = () => {
   return (
     <>
       {loading ? (
-        "loading..."
+        <Loading />
       ) : (
         <>
           {AiringTodayData && (

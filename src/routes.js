@@ -1,5 +1,8 @@
 export const routes = {
   Movie: "/",
   Series: "/Series",
-  detail: "/detaillist/:id",
+  detail: "/detail/:id",
+  seriesdetail: "/seriesdetail/:id",
+  search: "/search",
+  people: "/people/:id",
 };
