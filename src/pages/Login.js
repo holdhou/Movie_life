@@ -1,5 +1,5 @@
-import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 import { Errormessage } from "../components/Errormessage";
 import { Link } from "react-router-dom";
 
@@ -56,43 +56,65 @@ const Button = styled.button`
   border-radius: 10px;
   font-size: 18px;
   font-weight: 700;
+  opacity: ${(props) => (props.$isActive ? 1 : 0.5)};
+  cursor: ${(props) => (props.$isActive ? "pointer" : "default")};
 `;
 export const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm();
 
-  const loginHandler = (data) => {};
+  const loginHandler = (data) => {
+    if (isValid) {
+      window.location.href = "#/movie";
+    }
+  };
 
   return (
     <Wrap>
       <Form onSubmit={handleSubmit(loginHandler)}>
-        <Title>LOGIN</Title>
+        <Title>로그인</Title>
         <Input
           {...register("userid", {
             required: "아이디를 입력해주세요",
+            minLength: {
+              value: 4,
+              message: "아이디는 최소 4자리 이상이어야 합니다.",
+            },
+            pattern: {
+              value: /^(?=.*[A-Za-z]).{4,15}$/,
+              message: "아이디 4자이상15이하 로 입력하세요 ",
+            },
           })}
           type="text"
           placeholder="아이디"
         />
-
+        <Errormessage messages={[errors?.userid?.message]} />
         <Input
           {...register("password", {
             required: "패스워드를 입력해주세요",
+            minLength: {
+              value: 8,
+              message: "패스워드는 최소 8자리 이상이어야 합니다.",
+            },
+            pattern: {
+              value: /^(?=.*[A-Za-z])(?=.*\d).{8,20}$/,
+              message: "패스워드 8자이상 20이하로 입력하세요",
+            },
           })}
           type="password"
           placeholder="비밀번호"
         />
-        <Errormessage
-          messages={[errors?.userid?.message, errors?.password?.message]}
-        />
+        <Errormessage messages={[errors?.password?.message]} />
 
-        <Button>로그인</Button>
+        <Button $isActive={isValid}>로그인</Button>
+
         <Span>또는</Span>
-        <Link to={"/registration"}>
-          <Button>회원가입</Button>
+
+        <Link to="/registration">
+          <Button $isActive={true}>신규등록</Button>
         </Link>
       </Form>
     </Wrap>

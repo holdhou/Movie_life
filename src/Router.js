@@ -11,6 +11,7 @@ import { Seriesdetail } from "./pages/detail/Seriesdetail";
 import { Search } from "./pages/Search/Search";
 import { People } from "./pages/people/People";
 import { Login } from "./pages/Login";
+import { Registration } from "./pages/Registration";
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path={routes.search} element={<Search />} />
         <Route path={routes.people} element={<People />} />
         <Route path={routes.loginpage} element={<Login />} />
+        <Route path={routes.registration} element={<Registration />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />
