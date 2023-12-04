@@ -10,6 +10,7 @@ import { Detaillist } from "./pages/detail/Detaillist";
 import { Seriesdetail } from "./pages/detail/Seriesdetail";
 import { Search } from "./pages/Search/Search";
 import { People } from "./pages/people/People";
+import { Login } from "./pages/Login";
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path={routes.seriesdetail} element={<Seriesdetail />} />
         <Route path={routes.search} element={<Search />} />
         <Route path={routes.people} element={<People />} />
+        <Route path={routes.loginpage} element={<Login />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />

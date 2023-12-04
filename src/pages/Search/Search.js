@@ -6,6 +6,7 @@ import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IMG_URL } from "../../constants";
 import { Link } from "react-router-dom";
+import { PageTitle } from "../../components/PageTitle";
 
 const Div = styled.div`
   margin-top: 10%;
@@ -17,7 +18,6 @@ const Crewtitle = styled.div`
   margin-bottom: 10px;
   letter-spacing: -7px;
   font-weight: 900;
-  
 `;
 
 const InputContainer = styled.div`
@@ -34,10 +34,9 @@ const Input = styled.input`
   font-size: 30px;
   padding-left: 40px;
   line-height: 30px;
-  @media screen and (max-width: 450px){
-     font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 20px;
   }
-  
 `;
 
 const InputImage = styled(FaSearch)`
@@ -61,7 +60,6 @@ const ConWrap = styled.div`
   @media screen and (max-width: 690px) {
     grid-template-columns: repeat(2, 1fr);
   }
- 
 `;
 
 const Con = styled.div``;
@@ -69,7 +67,7 @@ const Con = styled.div``;
 const Box = styled.div``;
 
 const Bgimg = styled.div`
-border-radius: 10px;
+  border-radius: 10px;
   border: 1px solid black;
   margin-bottom: 20px;
   width: 20vh;
@@ -81,7 +79,6 @@ border-radius: 10px;
     transform: scale(1.1);
   }
   @media screen and (max-width: 600px) {
-   
   }
 `;
 
@@ -95,11 +92,11 @@ const Title = styled.div`
   text-align: center;
   font-size: 100px;
   font-weight: 900;
-  @media screen and (max-width: 600px){
-     font-size: 70px;
+  @media screen and (max-width: 600px) {
+    font-size: 70px;
   }
-  @media screen and (max-width: 420px){
-     display: none;
+  @media screen and (max-width: 420px) {
+    display: none;
   }
 `;
 
@@ -121,17 +118,14 @@ export const Search = () => {
       const { results } = await searchapi(search);
       setMovies(results.filter((data) => data.media_type === "movie"));
       setPeople(results.filter((data) => data.media_type === "person"));
-      console.log(results);
     } catch (error) {
-      console.log(error);
+      console.log("에러" + error);
     }
   };
 
-  console.log(movies);
-  console.log(people);
-
   return (
     <Div>
+      <PageTitle titleName="Search" />
       <Title>MOVIE LIFE</Title>
       <Form onSubmit={handleSubmit(searchHandler)}>
         <InputContainer>

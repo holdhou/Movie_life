@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IMG_URL } from "../../constants";
 
-
 const Mainvideo = styled.section`
   width: 100%;
   height: 90vh;
@@ -28,9 +27,8 @@ const Mainvideo = styled.section`
   }
 
   @media screen and (max-width: 400px) {
-      padding: 20vh 0;
-      
-    }
+    padding: 20vh 0;
+  }
 `;
 const Title = styled.div`
   font-size: 38px;

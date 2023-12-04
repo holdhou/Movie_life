@@ -37,8 +37,7 @@ export const Movie = () => {
       }
     })();
   }, []);
-  console.log(nowplayData);
-  console.log(loading);
+  
 
   return (
     <>

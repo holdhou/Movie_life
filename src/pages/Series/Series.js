@@ -6,6 +6,7 @@ import { Mainseries } from "./Mainseries";
 import { Airing_Today, Popular, on_the_air } from "../../seriesapi";
 import { Seriestag } from "./Seriestag";
 import { Loading } from "../../components/Loading";
+import { PageTitle } from "../../components/PageTitle";
 
 export const Series = () => {
   const [AiringTodayData, setAiringTodayData] = useState();
@@ -32,10 +33,9 @@ export const Series = () => {
     })();
   }, []);
 
-  console.log(AiringTodayData);
-  console.log(loading);
   return (
     <>
+      <PageTitle titleName="Series" />
       {loading ? (
         <Loading />
       ) : (

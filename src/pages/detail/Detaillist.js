@@ -6,6 +6,7 @@ import { IMG_URL } from "../../constants";
 import { Loading } from "../../components/Loading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
+import { PageTitle } from "../../components/PageTitle";
 const Container = styled.div`
   padding: 100px 0;
   display: flex;
@@ -168,10 +169,11 @@ export const Detaillist = () => {
     })();
     window.scrollTo(0, 0);
   }, []);
-  console.log(moviecreditsData);
+ 
 
   return (
     <div>
+      <PageTitle titleName="Movie Detail" />
       {loading ? (
         <Loading />
       ) : (

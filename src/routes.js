@@ -5,4 +5,6 @@ export const routes = {
   seriesdetail: "/seriesdetail/:id",
   search: "/search",
   people: "/people/:id",
+  loginpage: "/loginpage",
+  registration: "/registration",
 };

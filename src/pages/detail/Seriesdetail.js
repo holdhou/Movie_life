@@ -6,6 +6,7 @@ import { aggregate_credits, seriesdetail } from "../../api";
 import { Loading } from "../../components/Loading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
+import { PageTitle } from "../../components/PageTitle";
 
 const Container = styled.div`
   padding: 100px 0 ;
@@ -198,11 +199,12 @@ export const Seriesdetail = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(aggregateData);
-  console.log(seriesdetailData);
+  
 
   return (
+    
     <div>
+      <PageTitle titleName="Series Detail" />
       {loading ? (
         <Loading />
       ) : (

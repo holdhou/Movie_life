@@ -4,6 +4,7 @@ import { Loading } from "../../components/Loading";
 import { Link, useParams } from "react-router-dom";
 import { peopleapi, peoplecreaditapi, peopletranslationsapi } from "../../api";
 import { IMG_URL } from "../../constants";
+import { PageTitle } from "../../components/PageTitle";
 
 const Con = styled.div``;
 const Crewtitle = styled.div`
@@ -75,9 +76,10 @@ export const People = () => {
     })();
     window.scrollTo(0, 0);
   }, []);
-  console.log(peoplescreditsData);
+ 
   return (
     <div>
+       <PageTitle titleName="Peoples" />
       {loading ? (
         <Loading />
       ) : (
