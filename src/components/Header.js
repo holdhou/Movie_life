@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { routes } from "../routes";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faTicket } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faTicket, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const SHeader = styled.header`
   width: 100%;
@@ -72,7 +72,11 @@ export const Header = () => {
         </li>
         <SearchIconContainer>
           <Link to={"/search"}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />검색
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            검색
+          </Link>
+          <Link to={"/"}>
+            <FontAwesomeIcon icon={faUser} />
           </Link>
         </SearchIconContainer>
       </Menu>
