@@ -7,11 +7,12 @@ import { Loading } from "../../components/Loading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
 import { PageTitle } from "../../components/PageTitle";
+import { Noimg } from "../../components/Noimg";
 
 const Container = styled.div`
-  padding: 100px 0 ;
+  padding: 100px 0;
   display: flex;
-  
+
   @media screen and (max-width: 1079px) {
     flex-direction: column;
     padding: 100px 0;
@@ -21,8 +22,10 @@ const Container = styled.div`
 const Backimg = styled.div`
   width: 600px;
   height: 800px;
-  background: url(${IMG_URL}/w1280/${(props) => props.$bgUrl}) no-repeat center /
-    contain;
+  background: ${(props) =>
+    props.$bgUrl
+      ? `url(${IMG_URL}/original/${props.$bgUrl}) no-repeat center / contain`
+      : `url(${Noimg}) no-repeat center / contain`};
   @media screen and (max-width: 1080px) {
     width: 100%;
   }
@@ -98,12 +101,14 @@ const Castlist = styled.div`
   margin-top: 15px;
   font-size: 1.4em;
   border-top: 4px solid gray;
+  padding-top: 20px;
 `;
 const Seasonlist = styled.div`
   height: 100%;
   margin-top: 15px;
   font-size: 1.4em;
   border-top: 4px solid gray;
+  padding-top: 20px;
   margin-bottom: 20px;
 `;
 const Castimg = styled.div`
@@ -111,8 +116,10 @@ const Castimg = styled.div`
   height: 200px;
   border: 1px solid black;
 
-  background: url(${IMG_URL}/original/${(props) => props.$bgUrl}) no-repeat
-    center / cover;
+  background: ${(props) =>
+    props.$bgUrl
+      ? `url(${IMG_URL}/original/${props.$bgUrl}) no-repeat center / cover`
+      : `url(${Noimg}) no-repeat center / cover`};
 `;
 const Castname = styled.div`
   width: 150px;
@@ -133,8 +140,10 @@ const Div = styled.div`
 `;
 
 const Seasonimg = styled.div`
-  background: url(${IMG_URL}/original/${(props) => props.$bgUrl}) no-repeat
-    center / cover;
+  background: ${(props) =>
+    props.$bgUrl
+      ? `url(${IMG_URL}/original/${props.$bgUrl}) no-repeat center / cover`
+      : `url(${Noimg}) no-repeat center / cover`};
   display: flex;
   flex-direction: column;
   width: 150px;
@@ -179,6 +188,7 @@ const params = {
 export const Seriesdetail = () => {
   const { id } = useParams();
   const [seriesdetailData, setseriesDetailData] = useState();
+  const [seriesdetail2Data, setseriesDetail2Data] = useState();
   const [aggregateData, setaggregateData] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -187,6 +197,9 @@ export const Seriesdetail = () => {
       try {
         const detailData = await seriesdetail(id);
         setseriesDetailData(detailData);
+
+        const detailData2 = await seriesdetail(id);
+        setseriesDetail2Data(detailData2);
 
         const aggregateData = await aggregate_credits(id);
         setaggregateData(aggregateData);
@@ -199,10 +212,7 @@ export const Seriesdetail = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  
-
   return (
-    
     <div>
       <PageTitle titleName="Series Detail" />
       {loading ? (
@@ -226,12 +236,12 @@ export const Seriesdetail = () => {
       )}
 
       <Seasonlist>시리즈 시즌</Seasonlist>
-      {seriesdetailData && (
+      {seriesdetail2Data && (
         <CharacterSwiper
           {...params}
           scrollbar={{ draggable: true, dragSize: 30 }}
         >
-          {seriesdetailData.seasons.map((seasons) => (
+          {seriesdetail2Data.seasons.map((seasons) => (
             <SwiperSlide key={seasons.id}>
               <Season>
                 <Seasonimg $bgUrl={seasons.poster_path}></Seasonimg>

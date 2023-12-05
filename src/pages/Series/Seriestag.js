@@ -11,7 +11,7 @@ import { Navigation } from "swiper/modules";
 register();
 
 const Layout = styled.section`
-  
+  margin: 75px 0;
 `;
 const Covertitle = styled.section`
   font-size: 20px;
@@ -20,6 +20,7 @@ const Covertitle = styled.section`
 `;
 
 const Title = styled.section`
+
   font-size: 50px;
   font-weight: 600;
   margin-bottom: 10px;

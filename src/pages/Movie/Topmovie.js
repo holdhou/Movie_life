@@ -10,7 +10,7 @@ import { Navigation } from "swiper/modules";
 register();
 
 const Layout = styled.section`
-  margin: 0 0 20px 0;
+ margin: 75px 0;
 `;
 const Imgnumber = styled.h4`
   font-size: 40px;
@@ -69,7 +69,7 @@ const CustomSwiper = styled(Swiper)`
 const Title = styled.section`
   font-size: 50px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   @media screen and (max-width: 450px) {
     font-size: 30px;
@@ -108,8 +108,8 @@ const params = {
 export const Topmovie = ({ TitleName, Moviedata }) => {
   return (
     <>
-      <Title>{TitleName}</Title>
       <Layout>
+        <Title>{TitleName}</Title>
         <CustomSwiper {...params} loop={true} navigation>
           {Moviedata.slice(0, 10).map((data, index) => (
             <SwiperSlide key={data.id}>

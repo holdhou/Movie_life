@@ -11,8 +11,8 @@ body{
     
     letter-spacing:  -1px;
     word-break: break-all;
-      font-family: "Noto+Sans+KR",sans-serif;
-      margin: 0 5% 0 5%;
+   
+    margin: 0 5% 0 5%;
      
 }
 a{

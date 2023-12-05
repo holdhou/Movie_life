@@ -1,0 +1,1 @@
+export const Noimg = "https://blog.kakaocdn.net/dn/Hh733/btrcA1znbC9/m3cFIkMBMYyJlnHe7WBiN1/img.gif";

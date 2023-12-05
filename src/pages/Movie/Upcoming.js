@@ -10,7 +10,7 @@ import { Navigation } from "swiper/modules";
 register();
 
 const Layout = styled.section`
-  margin: 0 0 10px 0;
+  margin: 75px 0;
 `;
 const Title = styled.section`
   font-size: 50px;

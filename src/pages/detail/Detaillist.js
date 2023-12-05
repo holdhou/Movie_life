@@ -7,6 +7,7 @@ import { Loading } from "../../components/Loading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
 import { PageTitle } from "../../components/PageTitle";
+import { Noimg } from "../../components/Noimg";
 const Container = styled.div`
   padding: 100px 0;
   display: flex;
@@ -20,8 +21,10 @@ const Container = styled.div`
 const Backimg = styled.div`
   width: 600px;
   height: 800px;
-  background: url(${IMG_URL}/w1280/${(props) => props.$bgUrl}) no-repeat center /
-    contain;
+  background: ${(props) =>
+    props.$bgUrl
+      ? `url(${IMG_URL}/original/${props.$bgUrl}) no-repeat center / contain`
+      : `url(${Noimg}) no-repeat center / contain`};
   @media screen and (max-width: 1080px) {
     width: 100%;
   }
@@ -62,7 +65,7 @@ const Rated = styled.div`
   font-weight: 600;
 `;
 
-const Genres = styled.ul`
+const Genress = styled.ul`
   margin: 20px 0;
 
   li {
@@ -97,6 +100,7 @@ const Castlist = styled.div`
   height: 100%;
   margin-top: 15px;
   font-size: 1.4em;
+  padding-top: 20px;
   border-top: 4px solid gray;
 `;
 const Castimg = styled.div`
@@ -104,8 +108,10 @@ const Castimg = styled.div`
   height: 200px;
   border: 1px solid black;
 
-  background: url(${IMG_URL}/original/${(props) => props.$bgUrl}) no-repeat
-    center / cover;
+  background: ${(props) =>
+    props.$bgUrl
+      ? `url(${IMG_URL}/original/${props.$bgUrl}) no-repeat center / cover`
+      : `url(${Noimg}) no-repeat center / cover`};
 `;
 const Cast = styled.div`
   width: 150px;
@@ -119,10 +125,7 @@ const Castname = styled.div`
   font-weight: 900;
 `;
 const Ch = styled.div``;
-const Crewname = styled.div`
-  padding: 5px 5px 0 5px;
-  width: 150px;
-`;
+
 const params = {
   modules: [Scrollbar],
   spaceBetween: 15,
@@ -149,7 +152,9 @@ const params = {
 export const Detaillist = () => {
   const { id } = useParams();
   const [moviedetailData, setmovieDetailData] = useState();
+  const [moviedetail2Data, setmovieDetail2Data] = useState();
   const [moviecreditsData, setmoviecreditsData] = useState();
+  const [moviecredits2Data, setmoviecredits2Data] = useState();
 
   const [loading, setLoading] = useState(true);
 
@@ -158,9 +163,13 @@ export const Detaillist = () => {
       try {
         const detailData = await moviedetail(id);
         setmovieDetailData(detailData);
+        const detail2Data = await moviedetail(id);
+        setmovieDetail2Data(detailData);
 
         const creditsData = await moviecredits(id);
         setmoviecreditsData(creditsData);
+        const credits2Data = await moviecredits(id);
+        setmoviecredits2Data(credits2Data);
 
         setLoading(false);
       } catch (error) {
@@ -169,7 +178,6 @@ export const Detaillist = () => {
     })();
     window.scrollTo(0, 0);
   }, []);
- 
 
   return (
     <div>
@@ -182,11 +190,11 @@ export const Detaillist = () => {
           <Con>
             <Title>{moviedetailData.title}</Title>
             <Rated>평점{moviedetailData.vote_average.toFixed(1)}</Rated>
-            <Genres>
+            <Genress>
               {moviedetailData.genres.map((genres) => (
-                <li key={genres}>{genres.name}</li>
+                <li key={genres.id}>{genres.name}</li>
               ))}
-            </Genres>
+            </Genress>
             <Release>{moviedetailData.release_date}</Release>
             <Runtime>상영시간{moviedetailData.runtime}분</Runtime>
             <Overview>{moviedetailData.overview}</Overview>
@@ -194,17 +202,15 @@ export const Detaillist = () => {
         </Container>
       )}
 
-      <Castlist>감독</Castlist>
-      {moviecreditsData && (
+      <Castlist>감독 및 스태프</Castlist>
+      {moviecredits2Data && (
         <CharacterSwiper
           {...params}
           scrollbar={{ draggable: true, dragSize: 30 }}
         >
           {Array.from(
             new Map(
-              moviecreditsData.crew
-                .filter((crew) => crew.known_for_department === "Directing")
-                .map((crew) => [crew.name, crew])
+              moviecredits2Data.crew.map((crew) => [crew.name, crew])
             ).values()
           ).map((crew) => (
             <SwiperSlide key={crew.id}>

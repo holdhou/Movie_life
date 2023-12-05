@@ -5,21 +5,29 @@ import { Link, useParams } from "react-router-dom";
 import { peopleapi, peoplecreaditapi, peopletranslationsapi } from "../../api";
 import { IMG_URL } from "../../constants";
 import { PageTitle } from "../../components/PageTitle";
+import { Noimg } from "../../components/Noimg";
 
-const Con = styled.div``;
+const Con = styled.div`
+  margin-left: 10px;
+`;
+const Crew = styled.div`
+  
+  
+`;
 const Crewtitle = styled.div`
-font-size: 30px;
-margin: 20px 0;
-font-weight: 900;
-
+  font-size: 30px;
+  margin: 20px 0;
+  font-weight: 900;
 `;
 const Casttitlename = styled.div`
-padding: 5% ;
-font-weight: 600;
-width: 10vw;
+  padding: 5%;
+  font-weight: 600;
+  width: 10vw;
+  grid-template-columns: repeat(7, 1fr);
 `;
 const Crewtitlebox = styled.div`
-display: flex;
+ display:flex;
+ 
 `;
 const Castjop = styled.div`
   font-size: 25px;
@@ -35,27 +43,39 @@ const Castname = styled.div`
 const Crewbox = styled.div`
   display: flex;
 
-  margin-top: 5%;
+  margin-top: 10vh;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    padding: 100px 0;
+  }
 `;
 const Crewimg = styled.div`
-  background: url(${IMG_URL}/original/${(props) => props.$bgUrl}) no-repeat
-    center / contain;
+  background: ${(props) =>
+    props.$bgUrl
+      ? `url(${IMG_URL}/original/${props.$bgUrl}) no-repeat center / cover`
+      : `url(${Noimg}) no-repeat center / cover`};
   height: 400px;
   width: 300px;
+  border: 1px solid;
 `;
 const Posterimg = styled.div`
-  background: url(${IMG_URL}/original/${(props) => props.$bgUrl}) no-repeat
-    center / contain;
-    margin: 0 10px ;
-  height: 200px;
-  width: 10vw;
+  background: ${(props) =>
+    props.$bgUrl
+      ? `url(${IMG_URL}/original/${props.$bgUrl}) no-repeat center / cover`
+      : `url(${Noimg}) no-repeat center / cover`};
+  margin: 0 10px;
+  height: 300px;
+  width: 200px;
   border: 1px solid black;
+  @media screen and (max-width: 1400px){
+    width: 150px;;
+  
+  }
 `;
 export const People = () => {
   const { id } = useParams();
   const [peoplesData, setpeopleData] = useState();
   const [peoplescreditsData, setpeoplescreditsDataData] = useState();
-  const [peoplestranslationsData, setpeoplestranslationsData] = useState();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
@@ -66,9 +86,6 @@ export const People = () => {
         const peoplecreditData = await peoplecreaditapi(id);
         setpeoplescreditsDataData(peoplecreditData);
 
-        const peopletranslationData = await peopletranslationsapi(id);
-        setpeoplestranslationsData(peopletranslationData);
-
         setLoading(false);
       } catch (error) {
         console.log("에러" + error);
@@ -76,10 +93,10 @@ export const People = () => {
     })();
     window.scrollTo(0, 0);
   }, []);
- 
+
   return (
     <div>
-       <PageTitle titleName="Peoples" />
+      <PageTitle titleName="Peoples" />
       {loading ? (
         <Loading />
       ) : (
@@ -99,17 +116,17 @@ export const People = () => {
       {peoplescreditsData && (
         <Crewtitlebox>
           {peoplescreditsData.cast.slice(0, 6).map((cast) => (
-            <crew key={cast.id}>
-              <Link to={`/detail/${cast.id}`}>  
-
-              <Posterimg $bgUrl={cast.poster_path}></Posterimg>
+            <Crew key={cast.id}>
+              <Link to={`/detail/${cast.id}`}>
+                <Posterimg $bgUrl={cast.poster_path}></Posterimg>
               </Link>
 
               <Casttitlename>{cast.title}</Casttitlename>
-            </crew>
+            </Crew>
           ))}
         </Crewtitlebox>
       )}
     </div>
   );
 };
+/* .slice(0, 6) */

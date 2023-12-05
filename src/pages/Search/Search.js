@@ -7,6 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import { IMG_URL } from "../../constants";
 import { Link } from "react-router-dom";
 import { PageTitle } from "../../components/PageTitle";
+import { Noimg } from "../../components/Noimg";
 
 const Div = styled.div`
   margin-top: 10%;
@@ -22,20 +23,27 @@ const Crewtitle = styled.div`
 
 const InputContainer = styled.div`
   position: relative;
+
   @media screen and (max-width: 420px) {
     margin-top: 40px;
   }
 `;
 
 const Input = styled.input`
-  width: 100%;
-  border-radius: 15px;
+  width: 500px;
+  border: none;
+  border-bottom: 1px solid;
+  outline: none;
   margin: 1% 0;
-  font-size: 30px;
+  font-size: 25px;
   padding-left: 40px;
   line-height: 30px;
-  @media screen and (max-width: 450px) {
+  margin: 30px 0;
+
+  @media screen and (max-width: 520px) {
     font-size: 20px;
+    width: 100%;
+    letter-spacing: -4px;
   }
 `;
 
@@ -50,19 +58,30 @@ const InputImage = styled(FaSearch)`
 
 const ConWrap = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  column-gap: 30px;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 0px;
   row-gap: 20px;
-  margin-bottom: 30px;
+  margin: 60px 0;
+  @media screen and (max-width: 1280px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
   @media screen and (max-width: 1160px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
   @media screen and (max-width: 690px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 560px) {
     grid-template-columns: repeat(2, 1fr);
   }
 `;
 
 const Con = styled.div``;
+const ContainerCenter = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Box = styled.div``;
 
@@ -70,15 +89,15 @@ const Bgimg = styled.div`
   border-radius: 10px;
   border: 1px solid black;
   margin-bottom: 20px;
-  width: 20vh;
-  height: 300px;
-  background: url(${IMG_URL}/original/${(props) => props.$bgUrl}) no-repeat
-    center/contain;
+  margin: 0 1vw;
+  height: 30vh;
+  background: ${(props) =>
+    props.$bgUrl
+      ? `url(${IMG_URL}/w500/${props.$bgUrl}) no-repeat center / cover`
+      : `url(${Noimg}) no-repeat center / cover`};
   transition: transform 0.5s;
   &:hover {
     transform: scale(1.1);
-  }
-  @media screen and (max-width: 600px) {
   }
 `;
 
@@ -118,8 +137,8 @@ export const Search = () => {
       const { results } = await searchapi(search);
       setMovies(results.filter((data) => data.media_type === "movie"));
       setPeople(results.filter((data) => data.media_type === "person"));
-    } catch (error) {
-      console.log("에러" + error);
+    } catch (errors) {
+      console.log("에러" + errors);
     }
   };
 
@@ -127,16 +146,19 @@ export const Search = () => {
     <Div>
       <PageTitle titleName="Search" />
       <Title>MOVIE LIFE</Title>
-      <Form onSubmit={handleSubmit(searchHandler)}>
-        <InputContainer>
-          <Input
-            {...register("search")}
-            type="text"
-            placeholder="제목, 이름을 입력해주세요"
-          />
-          <InputImage />
-        </InputContainer>
-      </Form>
+      <ContainerCenter>
+        <Form onSubmit={handleSubmit(searchHandler)}>
+          <InputContainer>
+            <Input
+              {...register("search")}
+              type="text"
+              placeholder="제목, 이름을 입력해주세요"
+            />
+            <InputImage />
+          </InputContainer>
+        </Form>
+      </ContainerCenter>
+
       <Box>
         {movies && movies.length > 0 && (
           <>

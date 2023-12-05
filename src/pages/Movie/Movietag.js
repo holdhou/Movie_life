@@ -11,21 +11,19 @@ import { Navigation } from "swiper/modules";
 register();
 
 const Layout = styled.section`
-  margin: 0 0 10px 0;
+  margin: 75px 0;
 `;
 
 const Title = styled.section`
   font-size: 50px;
   font-weight: 600;
   margin-bottom: 10px;
-  
 
   @media screen and (max-width: 450px) {
     font-size: 30px;
   }
 `;
 const CoverImg = styled.div`
-
   height: 300px;
   background: url(${IMG_URL}/w500/${(props) => props.$bgUrl}) no-repeat center;
   background-size: cover;
@@ -42,14 +40,11 @@ const CoverImg = styled.div`
     margin-bottom: 15px;
     background-size: cover;
   }
-
-  
 `;
 
 const CoverImgtitle = styled.div`
-font-size: 20px;
-font-weight: 700;
-
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 const CustomSwiper = styled(Swiper)`
@@ -102,7 +97,7 @@ export const Movietag = ({ TitleName, Moviedata }) => {
     <>
       <Layout>
         <Title>{TitleName}</Title>
-        <CustomSwiper {...params}loop={true} navigation>
+        <CustomSwiper {...params} loop={true} navigation>
           {Moviedata.map((data) => (
             <SwiperSlide key={data.id}>
               <Link to={`/detail/${data.id}`}>
