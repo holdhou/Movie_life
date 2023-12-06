@@ -15,6 +15,8 @@ const Crew = styled.div`
   
 `;
 const Crewtitle = styled.div`
+border-top: 4px solid gray;
+padding-top: 10px;
   font-size: 30px;
   margin: 20px 0;
   font-weight: 900;
@@ -22,12 +24,27 @@ const Crewtitle = styled.div`
 const Casttitlename = styled.div`
   padding: 5%;
   font-weight: 600;
-  width: 10vw;
+  
   grid-template-columns: repeat(7, 1fr);
 `;
 const Crewtitlebox = styled.div`
- display:flex;
- 
+ display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 0px;
+  row-gap: 20px;
+  margin: 60px 0;
+  @media screen and (max-width: 1280px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  @media screen and (max-width: 1160px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media screen and (max-width: 690px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 560px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 const Castjop = styled.div`
   font-size: 25px;
@@ -93,7 +110,7 @@ export const People = () => {
     })();
     window.scrollTo(0, 0);
   }, []);
-
+  
   return (
     <div>
       <PageTitle titleName="Peoples" />
@@ -115,7 +132,7 @@ export const People = () => {
       </Crewtitle>
       {peoplescreditsData && (
         <Crewtitlebox>
-          {peoplescreditsData.cast.slice(0, 6).map((cast) => (
+          {peoplescreditsData.cast .slice(0, 6) .map((cast) => (
             <Crew key={cast.id}>
               <Link to={`/detail/${cast.id}`}>
                 <Posterimg $bgUrl={cast.poster_path}></Posterimg>

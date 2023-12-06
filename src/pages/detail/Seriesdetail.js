@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IMG_URL } from "../../constants";
-import { aggregate_credits, seriesdetail } from "../../api";
+import { aggregate_credits, seriescredits, seriesdetail } from "../../api";
 import { Loading } from "../../components/Loading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Scrollbar } from "swiper/modules";
@@ -18,6 +18,7 @@ const Container = styled.div`
     padding: 100px 0;
   }
 `;
+
 
 const Backimg = styled.div`
   width: 600px;
@@ -190,6 +191,7 @@ export const Seriesdetail = () => {
   const [seriesdetailData, setseriesDetailData] = useState();
   const [seriesdetail2Data, setseriesDetail2Data] = useState();
   const [aggregateData, setaggregateData] = useState();
+  ;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -203,6 +205,7 @@ export const Seriesdetail = () => {
 
         const aggregateData = await aggregate_credits(id);
         setaggregateData(aggregateData);
+       
 
         setLoading(false);
       } catch (error) {
@@ -211,7 +214,7 @@ export const Seriesdetail = () => {
     })();
     window.scrollTo(0, 0);
   }, []);
-
+ 
   return (
     <div>
       <PageTitle titleName="Series Detail" />

@@ -24,7 +24,7 @@ const Mainbanner = styled.section`
   padding-top:40vh;
   h3 {
     margin-left: 5%;
-    max-width: 600px;
+    
     width: 100%;
     font-size: 80px;
     font-weight: 700;

@@ -52,6 +52,7 @@ export const aggregate_credits = (aggregateid) => {
   return fetch(aggregateUrl, options).then((res) => res.json());
 };
 
+
 /* 검색api */
 export const searchapi = (searchid) => {
   const searchUrl = baseurl + `search/multi?query=${searchid}&language=ko-kr`;
@@ -60,8 +61,7 @@ export const searchapi = (searchid) => {
 
 /* 배우및감독 api */
 export const peopleapi = (peopleid) => {
-  const peopleUrl =
-    baseurl + `person/${peopleid}` + "?language=ko-kr";
+  const peopleUrl = baseurl + `person/${peopleid}` + "?language=ko-kr";
   return fetch(peopleUrl, options).then((res) => res.json());
 };
 export const peoplecreaditapi = (peopleid) => {

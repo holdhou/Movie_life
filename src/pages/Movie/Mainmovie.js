@@ -22,6 +22,7 @@ const Mainvideo = styled.section`
 
   padding: 40vh 0;
   margin: 0% -5.5%;
+  
   color: white;
   h3 {
     max-width: 600px;

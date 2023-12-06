@@ -152,9 +152,8 @@ const params = {
 export const Detaillist = () => {
   const { id } = useParams();
   const [moviedetailData, setmovieDetailData] = useState();
-  const [moviedetail2Data, setmovieDetail2Data] = useState();
-  const [moviecreditsData, setmoviecreditsData] = useState();
   const [moviecredits2Data, setmoviecredits2Data] = useState();
+  const [moviecreditsData, setmoviecreditsData] = useState();
 
   const [loading, setLoading] = useState(true);
 
@@ -163,8 +162,6 @@ export const Detaillist = () => {
       try {
         const detailData = await moviedetail(id);
         setmovieDetailData(detailData);
-        const detail2Data = await moviedetail(id);
-        setmovieDetail2Data(detailData);
 
         const creditsData = await moviecredits(id);
         setmoviecreditsData(creditsData);
