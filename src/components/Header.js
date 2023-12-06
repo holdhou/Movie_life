@@ -87,7 +87,9 @@ export const Header = () => {
     <SHeader $isScrolled={isScrolled}>
       <Logo>
         <Img>
-          <FontAwesomeIcon icon={faTicket} />
+          <Link to={routes.Movie}>
+            <FontAwesomeIcon icon={faTicket} />
+          </Link>
         </Img>
         <Logonone>
           <Link to={routes.Movie}>Movie LIFE</Link>

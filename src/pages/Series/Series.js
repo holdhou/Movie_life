@@ -31,6 +31,7 @@ export const Series = () => {
         console.log("에러" + error);
       }
     })();
+    window.scrollTo(0, 0);
   }, []);
 
   return (

@@ -36,6 +36,7 @@ export const Movie = () => {
         console.log("에러" + error);
       }
     })();
+    window.scrollTo(0, 0)
   }, []);
   
 
