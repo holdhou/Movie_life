@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.6f52b338.css",
-    "main.js": "/static/js/main.3d628756.js",
-    "index.html": "/index.html",
-    "main.6f52b338.css.map": "/static/css/main.6f52b338.css.map",
-    "main.3d628756.js.map": "/static/js/main.3d628756.js.map"
+    "main.css": "/https//holdhou.github.io/Movie_life/static/css/main.6f52b338.css",
+    "main.js": "/https//holdhou.github.io/Movie_life/static/js/main.eda79163.js",
+    "index.html": "/https//holdhou.github.io/Movie_life/index.html",
+    "main.6f52b338.css.map": "/https//holdhou.github.io/Movie_life/static/css/main.6f52b338.css.map",
+    "main.eda79163.js.map": "/https//holdhou.github.io/Movie_life/static/js/main.eda79163.js.map"
   },
   "entrypoints": [
     "static/css/main.6f52b338.css",
-    "static/js/main.3d628756.js"
+    "static/js/main.eda79163.js"
   ]
 }
